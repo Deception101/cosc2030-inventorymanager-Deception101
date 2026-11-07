@@ -2,10 +2,32 @@
 
 // Chapter 19, Programming Challenge 12: Inventory Bin Queue
 #include <iostream>
+#include <iomanip>
 #include "InvItem.h"
 #include "InvStack.h"
 #include "InvQue.h"
+
 using namespace std;
+
+template <class Container>
+void displayInventory(const Container &inventory)
+{
+	int count = 0;
+
+	cout << "\n" << left << setw(6) << "#" << setw(16) << "Serial Number"
+		 << "Manufacture Date\n";
+	cout << string(40, '-') << endl;
+
+	inventory.forEach([&count](const InventoryItem &item)
+	{
+		count++;
+		cout << left << setw(6) << count << setw(16) << item.getSerialNum()
+			 << item.getManufactDate() << endl;
+	});
+
+	if (count == 0)
+		cout << "The inventory is empty.\n";
+}
 
 int main()
 {
@@ -34,14 +56,15 @@ int main()
 		cout << "\n------ Inventory Menu --------\n\n";
 		cout << "1.  Enter a part into the inventory.\n";
 		cout << "2.  Take a part from the inventory.\n";
-		cout << "3.  Quit.\n\n";
-		cout << "Please make a choice (1, 2, or 3):  ";
+		cout << "3.  Quit.\n";
+		cout << "4.  Display all parts.\n\n";
+		cout << "Please make a choice (1, 2, 3, or 4):  ";
 		cin >> choice;
 
 		// Validate choice
-		while (choice < 1 || choice > 3)
+		while (choice < 1 || choice > 4)
 		{
-			cout << "Please enter 1, 2, or 3: ";
+			cout << "Please enter 1, 2, or 3, or 4: ";
 			cin >> choice;
 		}
 
@@ -84,6 +107,13 @@ int main()
 
 		case 3:
 			cout << "\nGoodbye!\n\n";
+			break;
+
+		case 4:
+			if (useQueue)
+				displayInventory(queue);
+			else
+				displayInventory(stack);
 			break;
 		}
 	} while (choice  != 3);
