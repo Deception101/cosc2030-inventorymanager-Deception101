@@ -32,7 +32,7 @@ public:
 	long getSerialNum() const
 		{ return serialNum; }
 
-	string getManufactDate()
+	string getManufactDate() const
 		{ return manufactDate; }
 
 	int getLotNum() const

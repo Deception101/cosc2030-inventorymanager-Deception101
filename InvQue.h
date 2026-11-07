@@ -17,6 +17,10 @@ class InvQue
 		void enqueue(T);
 		void dequeue(T &);
 		bool isEmpty();
+
+
+        template <class Func>
+		void forEach(Func visit) const;
 };
 
 
@@ -64,5 +68,13 @@ template <class T>
 bool InvQue<T>::isEmpty()
 {
 	return front == nullptr;
+}
+
+template <class T>
+template <class Func>
+void InvQue<T>::forEach(Func visit) const
+{
+	for (QueueNode *node = front; node != nullptr; node = node->next)
+		visit(node->value);
 }
 

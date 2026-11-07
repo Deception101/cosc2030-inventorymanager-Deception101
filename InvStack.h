@@ -18,6 +18,9 @@ class InvStack
 		void push(T);
 		void pop(T &);
 		bool isEmpty();
+
+		template <class Func>
+		void forEach(Func visit) const;		
 };
 
 //*********************************************************
@@ -88,4 +91,12 @@ bool InvStack<T>::isEmpty()
 	}
 		
 	return status;
+}
+
+template <class T>
+template <class Func>
+void InvStack<T>::forEach(Func visit) const
+{
+	for (StackNode *node = top; node != nullptr; node = node->next)
+		visit(node->value);
 }
