@@ -4,6 +4,7 @@
 #include <iostream>
 #include "InvItem.h"
 #include "InvStack.h"
+#include "InvQue.h"
 using namespace std;
 
 int main()
